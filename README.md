@@ -1,6 +1,5 @@
-[wazuh-siem-lab-README.md](https://github.com/user-attachments/files/27066077/wazuh-siem-lab-README.md)
-# wash-siem-lab
-Home lab SIEM deployment using Wazuh (Docker) with attack simulation, MIT# Wazuh SIEM Home Lab — Threat Detection & Attack Simulation
+[wazuh-siem-lab-README-fixed.md](https://github.com/user-attachments/files/27066446/wazuh-siem-lab-README-fixed.md)
+# Wazuh SIEM Home Lab — Threat Detection & Attack Simulation
 
 **Author:** German Abarca  
 **GitHub:** github.com/German430  
@@ -75,23 +74,23 @@ Key deployment notes:
 - Generated SSL certificates via the included `generate-indexer-certs.yml` before first launch
 - Remapped host ports to avoid conflicts with Docker Desktop's reserved ports on macOS
 
-![Docker containers running](assets/screenshots/WazuhCLcontainerrunning.jpg)
+![Docker containers running](WazuhCLcontainerrunning.jpg)
 *All three Wazuh containers running: indexer, manager, dashboard*
 
-![Wazuh Dashboard login](assets/screenshots/Wazuhuponlocalhost.jpg)
+![Wazuh Dashboard login](Wazuhuponlocalhost.jpg)
 *Wazuh Dashboard accessible at https://localhost*
 
 ### Agent Enrollment
 
 Both endpoints were registered via the Wazuh API and enrolled with authentication keys. The Kali agent required the ARM64 package due to the Apple Silicon host architecture.
 
-![Kali agent install](assets/screenshots/WazuhinstallagentKali.png)
+![Kali agent install](WazuhinstallagentKali.png)
 *Kali agent installed using ARM64 .deb package*
 
-![Kali agent running](assets/screenshots/WazuhKalistartagent.jpg)
+![Kali agent running](WazuhKalistartagent.jpg)
 *Kali agent service active and running*
 
-![Both agents active](assets/screenshots/WazuhBothagentsup.jpg)
+![Both agents active](WazuhBothagentsup.jpg)
 *Both win11-lab and kali-lab showing Active in the Wazuh Dashboard*
 
 | Agent | OS | IP | Role | Status |
@@ -109,7 +108,7 @@ Once agents were enrolled, Wazuh immediately began collecting Windows Security E
 
 Wazuh automatically ran the **CIS Microsoft Windows 11 Enterprise Benchmark v1.0.0** against the target VM.
 
-![win11-lab endpoint dashboard](assets/screenshots/WazuhScanresults1.jpg)
+![win11-lab endpoint dashboard](WazuhScanresults1.jpg)
 *Wazuh endpoint dashboard showing MITRE ATT&CK hits, PCI DSS compliance, and SCA results*
 
 | Policy | Passed | Failed | Score |
@@ -122,7 +121,7 @@ A 32% score indicates significant security misconfigurations on a default Window
 
 Within 7 days of agent enrollment, Wazuh generated **103 MITRE ATT&CK mapped alerts** from normal Windows activity alone. This demonstrates a key SOC concept: legitimate system behavior frequently overlaps with known attacker techniques — a primary driver of alert fatigue in real SOC environments.
 
-![MITRE ATT&CK events table](assets/screenshots/Wazuhmitreattacks.jpg)
+![MITRE ATT&CK events table](Wazuhmitreattacks.jpg)
 *MITRE ATT&CK overview showing tactics and alert distribution over time*
 
 | Tactic | Technique | Rule ID | Level | Description |
@@ -149,7 +148,7 @@ sudo nmap -sS -A 172.16.63.133
 
 **Initial scan result (Windows Firewall enabled):**
 
-![Initial Nmap scan - firewall on](assets/screenshots/WazuhInitialkalinmap.jpg)
+![Initial Nmap scan - firewall on](WazuhInitialkalinmap.jpg)
 *First scan with Windows Firewall enabled — host confirmed up, all 1000 ports filtered*
 
 With the firewall active, all 1000 ports returned filtered/no-response. After disabling the firewall for lab purposes, the scan revealed:
@@ -206,7 +205,7 @@ SMB  172.16.63.133  445  GSWINDOWSVM  [-] Connection Error: The NETBIOS connecti
 
 #### Alert 1 — Rule 60122 (Level 5)
 
-![Level 5 alert detail](assets/screenshots/Wazuhlevel5rule.jpg)
+![Level 5 alert detail](Wazuhlevel5rule.jpg)
 *Rule 60122 — Logon Failure alert with full compliance framework mappings*
 
 | Field | Value |
@@ -226,10 +225,10 @@ SMB  172.16.63.133  445  GSWINDOWSVM  [-] Connection Error: The NETBIOS connecti
 
 #### Alert 2 — Rule 92652 (Level 6)
 
-![Events table Level 5 and 6](assets/screenshots/WazuheventsFive_Six.jpg)
+![Events table Level 5 and 6](WazuheventsFive_Six.jpg)
 *Events table showing both Rule 60122 (Level 5) and Rule 92652 (Level 6) firing simultaneously*
 
-![Level 6 alert detail](assets/screenshots/WazuhEventdetails.jpg)
+![Level 6 alert detail](WazuhEventdetails.jpg)
 *Rule 92652 — Level 6 Pass the Hash alert — highest severity finding in this lab*
 
 | Field | Value |
@@ -318,4 +317,3 @@ wazuh-siem-lab/
 ## About This Lab
 
 This lab was built as part of an active transition into cybersecurity, running alongside CompTIA Security+ certification and an eJPT/OSCP study track. All attacks were conducted in an isolated VMware environment against intentionally configured targets. No external systems were targeted.
-RE ATT&amp;CK mapping, and threat detection documentation. Kali Linux → Windows 11 target.
